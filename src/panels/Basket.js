@@ -25,7 +25,7 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
     setSelfService(true);
   }
 
-  if(order_time !== '' ){
+  if(order_time !== '' && order_time !== null){
     setFaster(false);
     setTime(order_time);
   } else {
