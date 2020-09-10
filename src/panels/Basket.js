@@ -18,6 +18,7 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
   const [ price, products ] = useMemo(() => {
   const order_type = localStorage.getItem('order-type');
   const order_time = localStorage.getItem('order-time');
+  setFaster(true);
   if(!order_type){
     setSelfService(false);
   } else {
