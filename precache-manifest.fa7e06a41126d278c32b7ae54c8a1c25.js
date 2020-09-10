@@ -25,11 +25,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   },
   {
     "revision": "dfc54362fc2b0f7b99a4038b87dd9e64",
-    "url": "/static/media/1.dfc54362.png"
+    "url": "/andreev/static/media/1.dfc54362.png"
   },
   {
     "revision": "2048975925bd8553d8aaa5e1d9d1ffb1",
-    "url": "/static/media/2.20489759.png"
+    "url": "/andreev/static/media/2.20489759.png"
   },
   {
     "revision": "dbf82c38432d45de3c1c99f13c8b5fee",
