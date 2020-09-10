@@ -18,13 +18,16 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
   const [ price, products ] = useMemo(() => {
   const order_type = localStorage.getItem('order-type');
   const order_time = localStorage.getItem('order-time');
+  if (order_time === null) {
+    setFaster(true);
+  }
   if(!order_type){
     setSelfService(false);
   } else {
     setSelfService(true);
   }
 
-  if(order_time !== '' ){
+  if(order_time !== '' && order_time !== null){
     setFaster(false);
     setTime(order_time);
   } else {
@@ -288,7 +291,7 @@ return (
         </div>
         <div className="Place__choice-item">
           <h3>С собой</h3>
-          <Checkbox checked={selfService} onToggle={() => setSelfService(selfService)} />
+          <Checkbox checked={selfService} onToggle={() => setSelfService(!selfService)} />
         </div>
         <div className="Place__choice-item">
           <h3>На месте</h3>
