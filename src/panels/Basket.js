@@ -50,7 +50,7 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
     return [ accounting.formatNumber(result, 0, ' '), products ];
   }, [ order, item ]);
 
-if(time == '' && faster == false){
+if(time === '' && faster === false){
 return (
     <div className="Place">
       <header className="Place__header">
