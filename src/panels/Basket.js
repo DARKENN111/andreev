@@ -16,6 +16,22 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
   const item = area.items.filter(item => item.id === itemId)[0];
 
   const [ price, products ] = useMemo(() => {
+  const order_type = localStorage.getItem('order-type');
+  const order_time = localStorage.getItem('order-time');
+  if(!order_type){
+    setSelfService(false);
+  } else {
+    setSelfService(true);
+  }
+
+  if(order_time !== '' ){
+    setFaster(false);
+    setTime(order_time);
+  } else {
+    setFaster(true);
+    setTime('');
+  }
+
     const foodIds = new Set((item.foods || []).map(item => item.id));
 
     const products = Object.values(order)
@@ -34,7 +50,8 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
     return [ accounting.formatNumber(result, 0, ' '), products ];
   }, [ order, item ]);
 
-  return (
+if(time == '' && faster == false){
+return (
     <div className="Place">
       <header className="Place__header">
         <aside className="Place__trz">
@@ -57,9 +74,7 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
           alt="Fastfood logo"
           src={item.image}
         />
-        <h2
-          className="Place__restoraunt-name"
-        >
+        <h2 className="Place__restoraunt-name">
           {item.name}
         </h2>
         <p className="Place__restoraunt-type">
@@ -99,47 +114,181 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
         <Link
           className="Place__change-product"
           to={`/place/${areaId}/${itemId}`}
+          onFocus={() => {
+            localStorage.setItem('order-type', selfService);
+            localStorage.setItem('order-time', time);
+          }}
         >
           Изменить
         </Link>
       </div>
       <div className="Place__choice">
-        <h3>Время:</h3>
+        <h3>Получить заказ:</h3>
         <div className="Place__choice-item">
           <span>Как можно быстрее</span>
-          <Checkbox 
+          <Checkbox id="id-fast"
             checked={faster} 
             onToggle={() => {
-              if (faster) {
-                setFaster(false);
-              } else {
+              if (!faster) {
                 setTime('');
                 setFaster(true);
               }
             }}
           />
         </div>
-        <div className="Place__choice-item">
-          <span>Назначить</span>
-          <input
-            value={time}
-            onFocus={() => {
-              setFaster(false);
-            }}
-            onChange={event => {
+        <div className="Place__choice-item-time">
+        <div className="Time__div_style">
+          <span>Назначить:</span>
+          <p className="Time__style">
+          <input type="time" value={time} name="selected_time" list="time-list"
+           onFocus={() => {
+            setFaster(false);
+          }}
+           onChange={event => {
               setFaster(false);
               setTime(event.target.value);
-            }}
-            onBlur={() => {
-              if (time) {
-                setFaster(false);
-              }
-            }}
-          />
+            }}/>
+          </p>
+          </div>
+          <datalist id="time-list">
+          <option value="10:00"></option>
+          <option value="11:00"></option>
+          <option value="12:00"></option>
+          <option value="13:00"></option>
+          <option value="14:00"></option>
+          <option value="15:00"></option>
+          <option value="16:00"></option>
+          <option value="17:00"></option>
+          </datalist>
         </div>
         <div className="Place__choice-item">
           <h3>С собой</h3>
           <Checkbox checked={selfService} onToggle={() => setSelfService(!selfService)} />
+        </div>
+        <div className="Place__choice-item">
+          <h3>На месте</h3>
+          <Checkbox checked={!selfService} onToggle={() => setSelfService(!setSelfService)} />
+        </div>
+      </div>
+      <footer className="Place__footer">
+        <input type="button" value="Укажите время получения заказа" className="Place__order__disabled" disabled="disabled" />
+      </footer>
+    </div>
+    );
+} else {
+return (
+    <div className="Place">
+      <header className="Place__header">
+        <aside className="Place__trz">
+          <h1 className="Place__head">
+            <Link to="/" className="Place__logo">
+              {area.name}
+            </Link>
+          </h1>
+          <Link to="/edit" className="Place__change-tz">
+            <img
+              alt="change-profile"
+              src={edit}
+            />
+          </Link>
+        </aside>
+      </header>
+      <aside className="Place__restoraunt">
+        <img
+          className="Place__restoraunt-logo"
+          alt="Fastfood logo"
+          src={item.image}
+        />
+        <h2 className="Place__restoraunt-name">
+          {item.name}
+        </h2>
+        <p className="Place__restoraunt-type">
+          {item.description}
+        </p>
+      </aside>
+      <div className="Place__products-wrapper">
+        <ul className="Place__products">
+          {products.map(({ item, count }) => (
+            <li
+              className="Place__product"
+              key={item.id}
+            >
+              <img
+                className="Place__product-logo"
+                alt="Ordered product logo"
+                src={item.image}
+              />
+              <h3
+                className="Place__product-name"
+              >
+                {item.name}
+              </h3>
+              <p
+                className="Place__product-price"
+              >
+                Цена: {item.price}
+              </p>
+              <p
+                className="Place__product-count"
+              >
+                x{count}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <Link
+          className="Place__change-product"
+          to={`/place/${areaId}/${itemId}`}
+          onFocus={() => {
+            localStorage.setItem('order-type', selfService);
+            localStorage.setItem('order-time', time);
+          }}
+        >
+          Изменить
+        </Link>
+      </div>
+      <div className="Place__choice">
+        <h3>Получить заказ:</h3>
+        <div className="Place__choice-item">
+          <span>Как можно быстрее</span>
+          <Checkbox id="id-fast"
+            checked={faster} 
+            onToggle={() => {
+              if (!faster) {
+                setTime('');
+                setFaster(true);
+              }
+            }}
+          />
+        </div>
+        <div className="Place__choice-item-time">
+        <div className="Time__div_style">
+          <span>Назначить:</span>
+          <p className="Time__style">
+          <input type="time" value={time} name="selected_time" list="time-list"
+           onFocus={() => {
+            setFaster(false);
+          }}
+           onChange={event => {
+              setFaster(false);
+              setTime(event.target.value);
+            }}/>
+          </p>
+          </div>
+          <datalist id="time-list">
+          <option value="10:00"></option>
+          <option value="11:00"></option>
+          <option value="12:00"></option>
+          <option value="13:00"></option>
+          <option value="14:00"></option>
+          <option value="15:00"></option>
+          <option value="16:00"></option>
+          <option value="17:00"></option>
+          </datalist>
+        </div>
+        <div className="Place__choice-item">
+          <h3>С собой</h3>
+          <Checkbox checked={selfService} onToggle={() => setSelfService(selfService)} />
         </div>
         <div className="Place__choice-item">
           <h3>На месте</h3>
@@ -152,7 +301,9 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
         </Link>
       </footer>
     </div>
-  );
+    );
+}
+
 };
 
 export default withRouter(Basket);

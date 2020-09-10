@@ -165,6 +165,19 @@
   color: #fff;
 }
 
+.Place__order__disabled {
+  flex-grow: 1;
+  height: 65px;
+  border: 0;
+  border-radius: 25px;
+  line-height: 60px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 22px;
+  background-color: #cacaca;
+  color: #444;
+}
+
 .Place__products-wrapper {
   position: relative;
 }
@@ -241,6 +254,15 @@
   justify-content: space-between;
   width: 100%;
 } */
+
+.Time__style {
+  width: 200px;
+  margin-top: -6px;
+}
+
+.Time__div_style{
+  display: flex;
+}
 
 .Place__choice div {
   vertical-align: middle;
