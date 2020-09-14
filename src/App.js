@@ -19,28 +19,28 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 class App extends React.Component {
 
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			user: null
-		};
-	}
+        this.state = {
+            user: null
+        };
+    }
 
-	componentDidMount() {
-		bridge.send('VKWebAppGetUserInfo', {})
-			.then((user) => {
-				this.setState({ user });
-			});
-	}
+    componentDidMount() {
+        bridge.send('VKWebAppGetUserInfo', {})
+            .then((user) => {
+                this.setState({ user });
+            });
+    }
 
-	getImage = async () => {
-		const image = document.getElementById('url').value;
+    getImage = async () => {
+        const image = document.getElementById('url').value;
 
-		var xhr = new XMLHttpRequest();
-    	var json_obj, status = false;
-    	xhr.open("GET", image, true);
-    	xhr.onload = function (e) {
+        var xhr = new XMLHttpRequest();
+        var json_obj, status = false;
+        xhr.open("GET", image, true);
+        xhr.onload = function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           var json_obj = JSON.parse(xhr.responseText);
@@ -58,16 +58,16 @@ class App extends React.Component {
     xhr.send(null);
 
         console.log({image});
-	};
+    };
 
-	render() {
-		const { user, image } = this.state;
+    render() {
+        const { user, image } = this.state;
 
-		return (
+        return (
             <View activePanel="main">
                 <Panel id="main">
                     <PanelHeader>
-						{
+                        {
                             user ?
                                 <PanelHeaderContent
                                     status="VK Apps Image Example"
@@ -75,18 +75,18 @@ class App extends React.Component {
                                 >
                                     { user.first_name }
                                 </PanelHeaderContent>
-								:
-								'VK Apps Image Example'
-						}
+                                :
+                                'VK Apps Image Example'
+                        }
                     </PanelHeader>
 
                     <Group header={ <Header mode="secondary">Задание</Header> }>
-						<Div>
-							ууууУ нас есть мини-приложение, которое имеет возможность загружать изображения по внешней ссылке. Увы, в приложении допущена ошибка, из-за чего удаленный сервер получает параметры запуска пользователей, которые вставляют ссылку. Нужно объяснить почему так происходит и исправить ситуацию красиво и лаконично.
-						</Div>
-						<Div>
+                        <Div>
+                            ууууУ нас есть мини-приложение, которое имеет возможность загружать изображения по внешней ссылке. Увы, в приложении допущена ошибка, из-за чего удаленный сервер получает параметры запуска пользователей, которые вставляют ссылку. Нужно объяснить почему так происходит и исправить ситуацию красиво и лаконично.
+                        </Div>
+                        <Div>
                             Для облегчения тестирования можно использовать картинку <Text weight="semibold">https://service.pavel.im/image</Text> (good code — все круто, bad code — сервер получил параметры запуска)
-						</Div>
+                        </Div>
 
                         <FormLayout>
                             <Input type="text" id="url" />
@@ -94,17 +94,17 @@ class App extends React.Component {
                             <Button size="xl" onClick={ this.getImage }>Загрузить</Button>
                         </FormLayout>
 
-						{
-							!!image &&
-							<Div style={{ textAlign: 'center' }}>
+                        {
+                            !!image &&
+                            <Div style={{ textAlign: 'center' }}>
                                 <img src={ image } alt="remote file" />
-							</Div>
-						}
+                            </Div>
+                        }
                     </Group>
                 </Panel>
             </View>
-		);
-	}
+        );
+    }
 
 }
 
