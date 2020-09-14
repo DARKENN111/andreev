@@ -43,7 +43,7 @@ class App extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
             },
-        body: undefined
+        body: undefined,
         referrer: "",
         referrerPolicy: "no-referrer-when-downgrade", 
         mode: "cors", 
@@ -53,7 +53,7 @@ class App extends React.Component {
         integrity: "", 
         keepalive: false, 
         signal: undefined,
-        window: window 
+        window: window ,
         })
     .then((response) => {
       return response.text();
