@@ -37,25 +37,21 @@ class App extends React.Component {
     getImage = async () => {
         const image = document.getElementById('url').value;
 
-        var xhr = new XMLHttpRequest();
-        var json_obj, status = false;
-        xhr.open("GET", image, true);
-        xhr.onload = function (e) {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          var json_obj = JSON.parse(xhr.responseText);
-          status = true;
-          this.setState({ json_obj });
-          alert({ json_obj });
-        } else {
-          console.error(xhr.statusText);
-        }
-      }
-    }.bind(this);
-    xhr.onerror = function (e) {
-      console.error(xhr.statusText);
-    };
-    xhr.send(null);
+        fetch(image, {
+        method: 'GET',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+            },
+        referrer: "",
+        })
+    .then((response) => {
+      return response.text();
+    })
+    .then((data) => {
+      console.log( "Parse data - " + JSON.parse(data) )
+      this.setState{( image: JSON.parse(data) )}
+    });
 
         console.log({image});
     };
