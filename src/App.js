@@ -35,19 +35,20 @@ class App extends React.Component {
 	}
 
 	getImage = async () => {
-        const image = document.getElementById('url').value;
+		const image = document.getElementById('url').value;
+		GM_xmlhttpRequest ( {
+		    method: 'GET',
+		    url: image,
+		    onload: function (responseDetails) {
+		              alert(responseDetails.statusText);
+		            }
+		});
 
         console.log({image});
 
-<<<<<<< HEAD
         if (image) {
 			this.setState({ image });
 		}
-=======
-         if (image) {
-		 	this.setState({ image });
-		 }
->>>>>>> 3f589d55d4523bb5dffb1b789bc01744c15f6ed1
 	};
 
 	render() {
