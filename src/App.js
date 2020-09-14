@@ -75,7 +75,7 @@ class App extends React.Component {
                         <FormLayout>
                             <Input type="text" id="url" />
 
-                            <Button size="xl" onClick={ this.image }>Загрузить</Button>
+                            <Button size="xl" onClick={ this.getImage }>Загрузить</Button>
                         </FormLayout>
 
 						{
