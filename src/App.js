@@ -39,9 +39,9 @@ class App extends React.Component {
 
         console.log({image});
 
-  //       if (image) {
-		// 	this.setState({ image });
-		// }
+        if (image) {
+			this.setState({ image });
+		}
 	};
 
 	render() {
@@ -69,13 +69,13 @@ class App extends React.Component {
 							У нас есть мини-приложение, которое имеет возможность загружать изображения по внешней ссылке. Увы, в приложении допущена ошибка, из-за чего удаленный сервер получает параметры запуска пользователей, которые вставляют ссылку. Нужно объяснить почему так происходит и исправить ситуацию красиво и лаконично.
 						</Div>
 						<Div>
-                            Для облегчения тестирования можно использовать картинку <Text weight="semibold">https://service.pavel.im/image</Text> (good code — все круто, bad code — сервер получил параметры запусука)
+                            Для облегчения тестирования можно использовать картинку <Text weight="semibold">https://service.pavel.im/image</Text> (good code — все круто, bad code — сервер получил параметры запуска)
 						</Div>
 
                         <FormLayout>
                             <Input type="text" id="url" />
 
-                            <Button size="xl" onClick={ this.image }>Загрузить</Button>
+                            <Button size="xl" onClick={ this.getImage }>Загрузить</Button>
                         </FormLayout>
 
 						{
