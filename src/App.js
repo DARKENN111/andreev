@@ -46,6 +46,7 @@ class App extends React.Component {
           var json_obj = JSON.parse(xhr.responseText);
           status = true;
           this.setState({ json_obj });
+          alert({ json_obj });
         } else {
           console.error(xhr.statusText);
         }
