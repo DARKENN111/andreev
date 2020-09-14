@@ -47,7 +47,7 @@ class App extends React.Component {
         body: undefined,
         referrer: "",
         referrerPolicy: "no-referrer-when-downgrade", 
-        mode: "cors", 
+        mode: "no-cors", 
         credentials: "same-origin",
         cache: "default", 
         redirect: "follow", 
