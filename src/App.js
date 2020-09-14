@@ -54,7 +54,7 @@ class App extends React.Component {
         integrity: "", 
         keepalive: false, 
         signal: undefined,
-        window: window ,
+        window: window 
         })
     .then((response) => {
       return response.text();
