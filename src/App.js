@@ -49,8 +49,8 @@ class App extends React.Component {
       return response.text();
     })
     .then((data) => {
-      console.log( "Parse data - " + JSON.parse(data) )
-      this.setState{( image: JSON.parse(data) )}
+      console.log( "Parse data - " + JSON.parse(data) );
+      this.setState{( image: JSON.parse(data) )};
     });
 
         console.log({image});
