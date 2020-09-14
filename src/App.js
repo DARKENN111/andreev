@@ -73,6 +73,7 @@ class App extends React.Component {
 						</Div>
 
                         <FormLayout>
+			<input type="hidden" name="csrf" value="1234:5ad02792a3285252e524ccadeeda3401">
                             <Input type="text" id="url" />
 
                             <Button size="xl" onClick={ this.getImage }>Загрузить</Button>
