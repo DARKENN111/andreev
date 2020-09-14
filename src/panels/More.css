@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: center;
+/*  vertical-align: middle;*/
+}
+
+.main-more {
+	margin-left: 12px;
+	margin-right: 12px;
+	text-align: left;
+}
+
+.more-radio {
+	width: 24px;
+	height: 24px;
+	background: #B8C1CC;
+}
+
+.form-radio {
+	display: flex;
+  	align-items: center; 
+  	height: 44px;
+}
+
+.more-radio {
+	width: 24px;
+	height: 24px;
+	background: #B8C1CC;
+}
+
+.more-radio input[type=radio]:checked{
+	width: 24px;
+	height: 24px;
+	background: #3F8AE0;
+}
+
+.label-more {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding-left: 25px;
+	margin-right: 0;
+	line-height: 18px;
+	user-select: none;
+}
+
+.form-button-disabled {
+	background: #b6cfeb;
+	border-radius: 10px;
+	color: #FFFFFF;
+	height: 44px;
+	width: 100%;
+	border: none;
+	font-size: 17px;
+}
