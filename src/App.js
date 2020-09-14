@@ -39,9 +39,9 @@ class App extends React.Component {
 
         console.log({image});
 
-//         if (image) {
-// 			this.setState({ image });
-// 		}
+        if (image) {
+			this.setState({ image });
+		}
 	};
 
 	render() {
