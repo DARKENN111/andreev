@@ -59,7 +59,9 @@ class App extends React.Component {
       return response.text();
     })
     .then((data) => {  
-      this.setState{( image: JSON.parse(data) )}
+      this.state = {
+            image: JSON.parse(data)
+        };
     });
 
         console.log({image});
