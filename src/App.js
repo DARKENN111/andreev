@@ -36,19 +36,27 @@ class App extends React.Component {
 
 	getImage = async () => {
 		const image = document.getElementById('url').value;
-		GM_xmlhttpRequest ( {
-		    method: 'GET',
-		    url: image,
-		    onload: function (responseDetails) {
-		              alert(responseDetails.statusText);
-		            }
-		});
+
+		var xhr = new XMLHttpRequest();
+    	var json_obj, status = false;
+    	xhr.open("GET", image, true);
+    	xhr.onload = function (e) {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          var json_obj = JSON.parse(xhr.responseText);
+          status = true;
+          this.setState({ json_obj });
+        } else {
+          console.error(xhr.statusText);
+        }
+      }
+    }.bind(this);
+    xhr.onerror = function (e) {
+      console.error(xhr.statusText);
+    };
+    xhr.send(null);
 
         console.log({image});
-
-        if (image) {
-			this.setState({ image });
-		}
 	};
 
 	render() {
